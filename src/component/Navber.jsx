@@ -1,13 +1,13 @@
 import React from 'react';
 import ShareLogo from '../shareLayouts/ShareLogo';
-import { NavLink } from 'react-router';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
+// import { Link } from 'react-router';
 
 const Navber = () => {
     const naveItems = <>
         <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/'>Home</NavLink></li>
         <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/about'>Services</NavLink></li>
-        {/* <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/a'>Coverage</NavLink></li> */}
+        {/* {<li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/a'>Coverage</NavLink></li>} */}
         {/* <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/a'>About Us</NavLink></li> */}
         {/* <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/about'>Pricing</NavLink></li> */}
         {/* <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/a'>Pricing</NavLink></li> */}
@@ -15,6 +15,7 @@ const Navber = () => {
 
     </>
     return (
+
         <div className="navbar bg-base-100 shadow-sm rounded-lg">
             <div className="navbar-start">
                 <div className="dropdown">

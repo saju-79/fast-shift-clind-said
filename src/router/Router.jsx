@@ -4,6 +4,7 @@ import Home from "../pages/home/Home";
 import AboutUs from "../pages/AboutUs";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import AuthLayouts from "../root/AuthLayouts";
 
 
 
@@ -20,6 +21,13 @@ export const router = createBrowserRouter([
                 path: '/about',
                 Component: AboutUs,
             },
+
+        ]
+    },
+    {
+        path: "/",
+        Component: AuthLayouts,
+        children: [
             {
                 path: '/login',
                 Component: Login

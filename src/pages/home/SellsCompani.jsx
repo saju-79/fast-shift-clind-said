@@ -26,7 +26,8 @@ const SellsCompani = () => {
           spaceBetween={40}
           slidesPerView={5}
           loop={true}
-          autoplay={{ delay: 1000, disableOnInteraction: false  }}
+          // Autoplay={true}
+          autoplay={{ delay: 700, disableOnInteraction: false  }}
           breakpoints={{
             640: { slidesPerView: 3 },
             768: { slidesPerView: 4 },

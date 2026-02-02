@@ -18,7 +18,7 @@ const FeatureSection = ({ data }) => {
           </div>
 
           {/* Divider (only desktop) */}
-          <div className="hidden md:block h-24 border-l-2 border-dashed border-gray-300"></div>
+          <div className="hidden md:block h-24 border-l-2 border-dashed border-[#606060]"></div>
 
           {/* Content */}
           <div>

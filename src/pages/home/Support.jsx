@@ -12,7 +12,7 @@ const Support = () => {
             }, [])
             // console.log(Support)
     return (
-        <div className='py-4 md:py-6 lg:py-10 border-y-3 border-[#606060] border-dashed'>
+        <div data-aos="fade-up-right" className='  py-4 md:py-6 lg:py-10 border-y-2 border-[#606060] border-dashed'>
            <FeatureSection data={data}></FeatureSection>
         </div>
     );

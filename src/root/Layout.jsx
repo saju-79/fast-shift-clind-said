@@ -1,7 +1,7 @@
 import React from 'react';
-import Navber from '../component/Navber';
 import { Outlet } from 'react-router';
 import Footer from '../component/Footer';
+import Navber from '../component/Navber';
 
 const Layout = () => {
     return (

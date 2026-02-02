@@ -1,0 +1,72 @@
+[
+        {
+            "id": 1,
+            "name": "Awlad Hossain",
+            "role": "Senior Product Designer",
+            "comment":
+                "A posture corrector works by providing support and gentle alignment to your shoulders, back, and spine."
+        },
+        {
+            "id": 2,
+            "name": "Rasel Ahamed",
+            "role": "CTO",
+            "comment":
+                "This product significantly improved my posture and reduced daily back pain."
+        },
+        {
+            "id": 3,
+            "name": "Nasir Uddin",
+            "role": "CEO",
+            "comment":
+                "Very comfortable to wear and easy to use throughout the day."
+        },
+        {
+            "id": 4,
+            "name": "Sabbir Rahman",
+            "role": "UI Designer",
+            "comment":
+                "Perfect for long desk jobs. Highly recommended."
+        },
+        {
+            "id": 5,
+            "name": "Tamim Iqbal",
+            "role": "Developer",
+            "comment":
+                "Lightweight and effective posture support."
+        },
+        {
+            "id": 6,
+            "name": "Jannatul Ferdous",
+            "role": "Product Manager",
+            "comment":
+                "Helped me maintain better posture while working."
+        },
+        {
+            "id": 7,
+            "name": "Mehedi Hasan",
+            "role": "Marketing Lead",
+            "comment":
+                "Stylish and functional at the same time."
+        },
+        {
+            "id": 8,
+            "name": "Nusrat Jahan",
+            "role": "HR Manager",
+            "comment":
+                "Very easy to adjust and wear."
+        },
+        {
+            "id": 9,
+            "name": "Arif Khan",
+            "role": "Backend Engineer",
+            "comment":
+                "Good quality material and strong support."
+        },
+        {
+            "id": 10,
+            "name": "Rakibul Islam",
+            "role": "QA Engineer",
+            "comment":
+                "Worth the price. I use it every day."
+        }
+    ]

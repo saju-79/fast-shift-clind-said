@@ -5,6 +5,9 @@ import OuerService from '../../shareLayouts/OuerService';
 import SellsCompani from './SellsCompani';
 import Marquee from "react-fast-marquee"; // ✅ default import
 import Support from './Support';
+import Bemarchart from './beMarchant/Bemarchart';
+import Costomer from './coustomer/Costomer';
+import Question from './question/Question';
 
 
 const Home = () => {
@@ -27,6 +30,11 @@ const Home = () => {
             </div>
             <SellsCompani></SellsCompani>
             <Support></Support>
+            <div className="py-3 md:py-6 lg:py-8">
+                <Bemarchart></Bemarchart>
+            </div>
+            <Costomer></Costomer>
+            <Question></Question>
         </div>
     );
 };
