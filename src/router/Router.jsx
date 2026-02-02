@@ -5,6 +5,7 @@ import AboutUs from "../pages/AboutUs";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AuthLayouts from "../root/AuthLayouts";
+import ForgatePassword from "../pages/authallSection/ForgatePassword";
 
 
 
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
             {
                 path: '/register',
                 Component: Register,
+            },
+            {
+                path:'/forgate',
+                Component:ForgatePassword
             }
         ]
     }
