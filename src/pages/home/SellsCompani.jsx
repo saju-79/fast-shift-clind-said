@@ -7,24 +7,24 @@ import { Autoplay } from "swiper/modules";
 
 const logos = [
   "/assets/brands/amazon.png",
-  "/assets/brands/amazon_vector.png",
   "/assets/brands/moonstar.png",
   "/assets/brands/casio.png",
+  "/assets/brands/amazon_vector.png",
   "/assets/brands/randstad.png",
   "/assets/brands/star.png",
 ];
 
 const SellsCompani = () => {
   return (
-    <div className=" my-10">
+    <div className=" my-10 rounded-xl">
       <h1 className="text-[#03373D] my-6 text-center text-xl md:text-2xl lg:text-4xl font-extrabold">
         We've helped thousands of sales teams
       </h1>
 
-      <div className="bg-white py-6 items-center">
+      <div className="bg-white py-6 items-center rounded-xl">
         <Swiper
           spaceBetween={40}
-          slidesPerView={4}
+          slidesPerView={5}
           loop={true}
           autoplay={{ delay: 1000, disableOnInteraction: false  }}
           breakpoints={{
@@ -39,7 +39,7 @@ const SellsCompani = () => {
               <img
                 src={logo}
                 alt="brand"
-                className="h-10 md:h-12 lg:h-16 w-auto object-contain opacity-80 hover:opacity-100 transition"
+                className="h-3 md:h-5 lg:h-6 w-auto object-contain opacity-80 hover:opacity-100 transition"
               />
             </SwiperSlide>
           ))}

@@ -4,6 +4,7 @@ import ServiceCards from '../../component/ServiceCards';
 import OuerService from '../../shareLayouts/OuerService';
 import SellsCompani from './SellsCompani';
 import Marquee from "react-fast-marquee"; // ✅ default import
+import Support from './Support';
 
 
 const Home = () => {
@@ -25,6 +26,7 @@ const Home = () => {
                 </div>
             </div>
             <SellsCompani></SellsCompani>
+            <Support></Support>
         </div>
     );
 };
