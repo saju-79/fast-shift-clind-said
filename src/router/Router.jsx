@@ -6,6 +6,11 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AuthLayouts from "../root/AuthLayouts";
 import ForgatePassword from "../pages/authallSection/ForgatePassword";
+import Raider from "../pages/raider/Raider";
+import Calculate from "../pages/Calculate";
+import TacOder from "../pages/TacOder.jsx/TacOder";
+import Parcel from "../pages/parcel/Parcel";
+import Covarage from "../pages/covarage/Covarage";
 
 
 
@@ -22,6 +27,26 @@ export const router = createBrowserRouter([
                 path: '/about',
                 Component: AboutUs,
             },
+            {
+                path: "/raider",
+                Component: Raider
+            },
+            {
+                path: "/calculate",
+                Component: Calculate
+            },
+            {
+                path: '/oders',
+                Component: TacOder
+            },
+            {
+                path:'/parcel' ,
+                Component:Parcel
+            },
+            {
+                path:'/covarage' ,
+                Component:Covarage
+            }
 
         ]
     },
@@ -38,8 +63,8 @@ export const router = createBrowserRouter([
                 Component: Register,
             },
             {
-                path:'/forgate',
-                Component:ForgatePassword
+                path: '/forgate',
+                Component: ForgatePassword
             }
         ]
     }

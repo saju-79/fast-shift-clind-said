@@ -6,12 +6,13 @@ const Footer = () => {
     const clo = '[#ffffff]'
     const naveItems = <>
         <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/'>Home</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/about'>Services</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/a'>Coverage</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/a'>About Us</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/about'>Pricing</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/a'>Pricing</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/about'>Contact</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/oders'>Track Order</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/about'>About Us</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/calculate'>Pricing</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/parcel'>Send Parcel</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/raider'>Be a Rider</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/covarage'>Coverage</NavLink></li>
+        {/* <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg text-[#ffffff]  lg:text-lg font-semibold " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:text-[#ffffff]"} to='/about'>Contact</NavLink></li> */}
 
     </>
     return (
@@ -30,8 +31,8 @@ const Footer = () => {
                 </svg> */}
                 <div className="text-[#ffffff]"><ShareLogo color={clo} ></ShareLogo></div>
                 <div className="font-bold text-[#DADADA] text-center  items-center ">
-                    Enjoy fast, reliable parcel delivery with real-time tracking and 
-                    zero hassle. From personal packages 
+                    Enjoy fast, reliable parcel delivery with real-time tracking and
+                    zero hassle. From personal packages
                     to business shipments — we deliver on time, every time.
                 </div>
                 <div className=" flex gap-3 mt-2   ">

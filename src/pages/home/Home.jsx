@@ -12,7 +12,7 @@ import Question from './question/Question';
 
 const Home = () => {
     return (
-        <div className=' my-2 '>
+        <div className=' my-4 '>
             <Baner></Baner>
             {/* work */}
             <div className="lg:px-20 lg:py-4 md:py-2 py-1 md:px-10 px-5">
