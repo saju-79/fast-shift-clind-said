@@ -5,13 +5,13 @@ import { Link, NavLink } from 'react-router';
 
 const Navber = () => {
     const naveItems = <>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/'>Home</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/oders'>Track Order</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/about'>About Us</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/calculate'>Pricing</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/parcel'>Send Parcel</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/raider'>Be a Rider</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/covarage'>Coverage</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB6670]"} to='/'>Home</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB6670]"} to='/oders'>Track Order</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB6670]"} to='/about'>About Us</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB6670]"} to='/calculate'>Pricing</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB6670]"} to='/parcel'>Send Parcel</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB6670]"} to='/raider'>Be a Rider</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB6670]"} to='/covarage'>Coverage</NavLink></li>
         {/* <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] hover:bg-[#CAEB66]" : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB66]"} to='/about'>Contact</NavLink></li> */}
 
     </>

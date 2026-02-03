@@ -1,27 +1,39 @@
 import React from 'react';
+import OderCard from './OderCard';
 
 const TacOder = () => {
     return (
         <div className=" mt-4 mb-8 bg-[#ffffff] shadow-sm rounded-xl">
             <div className=" lg:px-20 lg:py-15 md:px-15  mg:py-10 px-8 py-4 ">
                 <div className="text-start space-y-3">
-                    <h1 className="text-5xl font-extrabold dark:text-[#03373D]">Pricing Calculator</h1>
+                    <h1 className="lg:text-5xl md:text-3xl text-xl font-extrabold dark:text-[#03373D]">Track Your Consignment</h1>
                     <p className="block mb-2 font-medium text-sm  dark:text-[#717171]">Now you can easily track your consignment</p>
                 </div>
                 {/* input */}
-                <div className="fmy-4 ">
-                    <div className="relative      ">
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                            <button type="submit" title="Search" className="p-1 focus:outline-none focus:ring">
-                                <svg fill="currentColor" viewBox="0 0 512 512" className="w-5 h-5 dark:text-gray-800">
-                                    <path d="M479.6,399.716l-81.084-81.084-62.368-25.767A175.014,175.014,0,0,0,368,192c0-97.047-78.953-176-176-176S16,94.953,16,192,94.953,368,192,368a175.034,175.034,0,0,0,101.619-32.377l25.7,62.2L400.4,478.911a56,56,0,1,0,79.2-79.195ZM48,192c0-79.4,64.6-144,144-144s144,64.6,144,144S271.4,336,192,336,48,271.4,48,192ZM456.971,456.284a24.028,24.028,0,0,1-33.942,0l-76.572-76.572-23.894-57.835L380.4,345.771l76.573,76.572A24.028,24.028,0,0,1,456.971,456.284Z"></path>
-                                </svg>
-                            </button>
-                        </span>
-                        <input type="search" name="Search" placeholder="Search tracking code here." className=" w-60 flex    py-2 pl-10 text-sm rounded-md  focus:outline-none dark:bg-[#CBD5E1] dark:text-gray-800 focus:dark:bg[#CBD5E1]" />
+                <div className="my-4">
+                    {/* serch section  */}
+                    <div className="lg:w-1/2 flex items-center">
+                        <label className="input w-3/4 ">
+                            <svg className="h-[1em] opacity-50 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g
+                                    strokeLinejoin="round"
+                                    strokeLinecap="round"
+                                    strokeWidth="2.5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                >
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.3-4.3"></path>
+                                </g>
+                            </svg>
+                            <input className=' ' type="search" required placeholder="Search tracking code here" />
+                        </label>
+                        <input type="button" name="search" value='Search' id="" className='text-[#1f1f1f] font-bold text-lg rounded-md ml-1 bg-[#CAEB66] py-2 px-4.5' />
                     </div>
-                        <input className='text-[#1f1f1f] bg-[#CAEB66] rounded-2xl' value='Search' type="Search" />
+                    <div className=" border border-b  border-solid border-[#00000010] lg:my-6 md:my-4 my-2"></div>
+                    {/* ditels card */}
                 </div>
+                <OderCard></OderCard>
                 <div className='text-start space-y-4 items-center flex-1 '>
 
                 </div>

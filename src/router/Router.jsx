@@ -11,6 +11,7 @@ import Calculate from "../pages/Calculate";
 import TacOder from "../pages/TacOder.jsx/TacOder";
 import Parcel from "../pages/parcel/Parcel";
 import Covarage from "../pages/covarage/Covarage";
+import Error from "../component/Error";
 
 
 
@@ -40,12 +41,12 @@ export const router = createBrowserRouter([
                 Component: TacOder
             },
             {
-                path:'/parcel' ,
-                Component:Parcel
+                path: '/parcel',
+                Component: Parcel
             },
             {
-                path:'/covarage' ,
-                Component:Covarage
+                path: '/covarage',
+                Component: Covarage
             }
 
         ]
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
             {
                 path: '/forgate',
                 Component: ForgatePassword
+            },
+            {
+                path: "/error",
+                Component: Error,
             }
         ]
     }

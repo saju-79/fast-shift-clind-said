@@ -14,7 +14,7 @@ const AuthLayouts = () => {
                     <Outlet></Outlet>
                 </div>
 
-                <img src="https://i.ibb.co.com/JWr7BQjk/auth-Image.png" alt="" className="object-cover w-full h-screen rounded-md xl:col-span-3 dark:bg-[#8FA74820]" />
+                <img src="https://i.ibb.co.com/JWr7BQjk/auth-Image.png" alt="" className="object-cover w-full h-full rounded-md xl:col-span-3 dark:bg-[#8FA74820]" />
 
             </div>
         </section>
