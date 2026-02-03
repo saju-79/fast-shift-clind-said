@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { use } from 'react';
 import ShareLogo from '../shareLayouts/ShareLogo';
 import { Link, NavLink } from 'react-router';
+import { AuthContextApi } from '../authContext/farebagseAurh/AuthContex';
 // import { Link } from 'react-router';
 
 const Navber = () => {
+
+    const user = use(AuthContextApi)
+    console.log(user) 
     const naveItems = <>
         <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB6670]"} to='/'>Home</NavLink></li>
         <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB6670]"} to='/oders'>Track Order</NavLink></li>
