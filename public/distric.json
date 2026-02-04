@@ -151,7 +151,7 @@
     "district": "Cox's Bazar",
     "city": "Cox's Bazar",
     "covered_area": ["Teknaf", "Ukhia", "Chakaria", "Ramu"],
-    "status": "active",
+    "status": "active", 
     "flowchart": "https://example.com/coxbazar-flowchart.png",
     "longitude": 92.0165,
     "latitude": 21.4272

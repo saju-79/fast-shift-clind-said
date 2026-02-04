@@ -46,7 +46,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/covarage',
-                Component: Covarage
+                Component: Covarage,
             }
 
         ]

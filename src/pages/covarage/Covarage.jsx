@@ -1,6 +1,13 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import CoverageMap from './CoverageMap';
 const Covarage = () => {
+    const [districData, setService] = useState([]);
+    useEffect(() => {
+        fetch('distric.json')
+            .then(res => res.json())
+            .then(data => setService(data))
+    }, [])
+// console.log(districData)
     return (
         <div className=" mt-4 mb-8 bg-[#ffffff] shadow-sm rounded-xl">
             <div className=" lg:px-20 lg:py-15 md:px-15  mg:py-10 px-8 py-4 ">
@@ -32,7 +39,7 @@ const Covarage = () => {
                     <h1 className="md:text-3xl text-xl font-extrabold dark:text-[#03373D] mb-6">We are available in 64 districts</h1>
                     {/* mag image  */}
                     <div className="">
-                        <img className='object-cover' src="https://i.ibb.co.com/pBKD253N/Frame-2087326253.png" alt="" />
+                        <CoverageMap districtsData ={districData}></CoverageMap>
                     </div>
                 </div>
             </div>
