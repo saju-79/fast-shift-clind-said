@@ -12,41 +12,44 @@ import TacOder from "../pages/TacOder.jsx/TacOder";
 import Parcel from "../pages/parcel/Parcel";
 import Covarage from "../pages/covarage/Covarage";
 import Error from "../component/Error";
+import PrivateRoute from "../private/PrivateRoute";
 
 
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        Component: Layout,
+        element:<Layout></Layout>,
         children: [
             {
                 path: '/',
-                Component: Home
+                element: <Home></Home>
             },
             {
                 path: '/about',
-                Component: AboutUs,
+                element: <PrivateRoute><AboutUs /></PrivateRoute>
             },
             {
                 path: "/raider",
-                Component: Raider
+                element: <PrivateRoute><Raider /></PrivateRoute>
             },
             {
                 path: "/calculate",
-                Component: Calculate
+                element: <PrivateRoute><Calculate /></PrivateRoute>
             },
             {
                 path: '/oders',
-                Component: TacOder
+                element: <PrivateRoute><TacOder /></PrivateRoute>
             },
             {
                 path: '/parcel',
-                Component: Parcel
+                element: <PrivateRoute><Parcel /></PrivateRoute>,
+                loader:()=>fetch('distric.json')
+                
             },
             {
                 path: '/covarage',
-                Component: Covarage,
+                element: <PrivateRoute><Covarage /></PrivateRoute>
             }
 
         ]

@@ -7,7 +7,7 @@ const Covarage = () => {
             .then(res => res.json())
             .then(data => setService(data))
     }, [])
-// console.log(districData)
+    // console.log(districData)
     return (
         <div className=" mt-4 mb-8 bg-[#ffffff] shadow-sm rounded-xl">
             <div className=" lg:px-20 lg:py-15 md:px-15  mg:py-10 px-8 py-4 ">
@@ -36,10 +36,10 @@ const Covarage = () => {
                         <input type="button" name="search" value='Search' id="" className='text-[#1f1f1f] font-bold text-lg rounded-md ml-1 bg-[#CAEB66] py-2 px-4.5' />
                     </div>
                     <div className=" border border-b  border-solid border-[#00000010] lg:my-6 md:my-4 my-2"></div>
-                    <h1 className="md:text-3xl text-xl font-extrabold dark:text-[#03373D] mb-6">We are available in 64 districts</h1>
+                    <h1 className="md:text-3xl text-xl font-extrabold dark:text-[#03373D] mb-6">We deliver almost all over Bangladesh</h1>
                     {/* mag image  */}
                     <div className="">
-                        <CoverageMap districtsData ={districData}></CoverageMap>
+                        <CoverageMap districtsData={districData}></CoverageMap>
                     </div>
                 </div>
             </div>

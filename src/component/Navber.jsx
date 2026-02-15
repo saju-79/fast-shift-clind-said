@@ -23,7 +23,7 @@ const Navber = () => {
                 console.log(error)
             })
     }
-    console.log(user)
+    // console.log(user)
     const naveItems = <>
         <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB6670]"} to='/'>Home</NavLink></li>
         <li><NavLink className={({ isActive }) => isActive ? "text-sm md:text-lg lg:text-lg font-semibold bg-[#CAEB66] text-[#606060] " : "text-sm md:text-lg lg:text-lg font-semibold text-[#606060] hover:bg-[#CAEB6670]"} to='/oders'>Track Order</NavLink></li>
