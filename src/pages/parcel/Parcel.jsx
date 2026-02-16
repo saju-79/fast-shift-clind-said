@@ -1,20 +1,35 @@
+// import { type } from 'firebase/firestore/pipelines';
 import React from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useLoaderData } from 'react-router';
 import Swal from 'sweetalert2';
+import AuthInfo from '../../authContext/farebagseAurh/AuthInfo';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
+
+const generateTrackingID = () => {
+    const date = new Date();
+    const datePart = date.toISOString().split("T")[0].replace(/-/g, "");
+    const rand = Math.random().toString(36).substring(2, 7).toUpperCase();
+    return `PCL-${datePart}-${rand}`;
+};
 const Parcel = () => {
+
     const {
         register,
         handleSubmit,
         control,
         // formState: { errors },
         reset
-    } = useForm();
-    // const axiosSecure = useAxiosSecure();
-    const axiosSecure = null;
+    } = useForm({
+        defaultValues: { parcelType: "document" }
+    });
+    // const axiosSecure = UseAxiosSecure();
+    const { user } = AuthInfo();
+    const axiosSecure = useAxiosSecure();
 
     const serviceCenters = useLoaderData();
+
     // console.log(serviceCenters.region ,'asi vai asi ')
     const regionsDuplicate = serviceCenters.map(c => c.region);
 
@@ -22,63 +37,111 @@ const Parcel = () => {
     // explore useMemo useCallback
     const senderRegion = useWatch({ control, name: 'senderRegion' });
     const receiverRegion = useWatch({ control, name: 'receiverRegion' });
+    const parcelType = useWatch({ control, name: 'type', });
     const districtsByRegion = (region) => {
         const regionDistricts = serviceCenters.filter(c => c.region === region);
         const districts = regionDistricts.map(d => d.district);
         return districts;
-    }
-    const handleSendParcel = data => {
-        console.log(data);
+    };
 
-        const isDocument = data.parcelType === 'document';
-        const isSameDistrict = data.senderDistrict === data.receiverDistrict;
-        const parcelWeight = parseFloat(data.parcelWeight);
+    const handleSendParcel = (data) => {
+        const weight = parseFloat(data.weight) || 0;
+        const isSameDistrict = data.sender_center === data.receiver_center;
 
-        let cost = 0;
-        if (isDocument) {
-            cost = isSameDistrict ? 60 : 80;
-        }
-        else {
-            if (parcelWeight < 3) {
-                cost = isSameDistrict ? 110 : 150;
+        let baseCost = 0;
+        let extraCost = 0;
+        let breakdown = "";
+
+        if (data.type === "document") {
+            baseCost = isSameDistrict ? 60 : 80;
+            breakdown = `Document delivery ${isSameDistrict ? "within" : "outside"} the district.`;
+        } else {
+            if (weight <= 3) {
+                baseCost = isSameDistrict ? 110 : 150;
+                breakdown = `Non-document up to 3kg ${isSameDistrict ? "within" : "outside"} the district.`;
+            } else {
+                const extraKg = weight - 3;
+                const perKgCharge = extraKg * 40;
+                const districtExtra = isSameDistrict ? 0 : 40;
+                baseCost = isSameDistrict ? 110 : 150;
+                extraCost = perKgCharge + districtExtra;
+
+                breakdown = `
+        Non-document over 3kg ${isSameDistrict ? "within" : "outside"} the district.<br/>
+        Extra charge: ৳40 x ${extraKg.toFixed(1)}kg = ৳${perKgCharge}<br/>
+        ${districtExtra ? "+ ৳40 extra for outside district delivery" : ""}
+      `;
             }
-            else {
-                const minCharge = isSameDistrict ? 110 : 150;
-                const extraWeight = parcelWeight - 3;
-                const extraCharge = isSameDistrict ? extraWeight * 40 : extraWeight * 40 + 40;
-
-                cost = minCharge + extraCharge;
-            }
         }
 
-        console.log('cost', cost);
+        const totalCost = baseCost + extraCost;
 
         Swal.fire({
-            title: "Agree with the Cost?",
-            text: `You will be charged ${cost} taka!`,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "I agree!"
+            title: "Delivery Cost Breakdown",
+            icon: "info",
+            html: `
+      <div class="text-left text-base space-y-2">
+        <p><strong>Parcel Type:</strong> ${data.type}</p>
+        <p><strong>Weight:</strong> ${weight} kg</p>
+        <p><strong>Delivery Zone:</strong> ${isSameDistrict ? "Within Same District" : "Outside District"}</p>
+        <hr class="my-2"/>
+        <p><strong>Base Cost:</strong> ৳${baseCost}</p>
+        ${extraCost > 0 ? `<p><strong>Extra Charges:</strong> ৳${extraCost}</p>` : ""}
+        <div class="text-gray-500 text-sm">${breakdown}</div>
+        <hr class="my-2"/>
+        <p class="text-xl font-bold text-green-600">Total Cost: ৳${totalCost}</p>
+      </div>
+    `,
+            showDenyButton: true,
+            confirmButtonText: "💳 Proceed to Payment",
+            denyButtonText: "✏️ Continue Editing",
+            confirmButtonColor: "#16a34a",
+            denyButtonColor: "#d3d3d3",
+            customClass: {
+                popup: "rounded-xl shadow-md px-6 py-6",
+            },
         }).then((result) => {
             if (result.isConfirmed) {
+                const tracking_id = generateTrackingID()
+                const parcelData = {
+                    ...data,
+                    cost: totalCost,
+                    created_by: user?.email,
+                    payment_status: 'unpaid',
+                    delivery_status: 'not_collected',
+                    creation_date: new Date().toISOString(),
+                    tracking_id: tracking_id,
+                };
 
-                // save the parcel info to the database
-                axiosSecure.post('/parcels', data)
-                    .then(res => {
-                        console.log('after saving parcel', res.data);
+                console.log("Ready for payment:", parcelData);
+
+                axiosSecure.post('/parcels', parcelData)
+                    .then(async (res) => {
+                        console.log(res.data);
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                title: "Redirecting...",
+                                text: "Proceeding to payment gateway.",
+                                icon: "success",
+                                timer: 1500,
+                                showConfirmButton: false,
+                            });
+
+                            /*   await logTracking({
+                                  tracking_id: parcelData.tracking_id,
+                                  status: "parcel_created",
+                                  details: `Created by ${user.displayName}`,
+                                  updated_by: user.email,
+                              }) */
+
+                            //  navigate('/dashboard/myParcels')
+                        }
                     })
 
-                // Swal.fire({
-                //     title: "Deleted!",
-                //     text: "Your file has been deleted.",
-                //     icon: "success"
-                // });
             }
         });
-        reset();
-    }
+        reset()
+    };
 
     return (
         <div className=" mt-4 mb-8 bg-[#ffffff] shadow-sm rounded-xl">
@@ -95,10 +158,19 @@ const Parcel = () => {
                         {/* check box */}
                         <div className="text-start flex gap-6 ">
                             <div className=" items-center">
-                                <input type="radio" value="document" {...register("parcelType")} defaultChecked className="radio radio-primary" />  Document
+                                <input
+                                    type="radio"
+                                    value="document"
+                                    {...register("type")}
+                                    defaultChecked
+                                    className="radio radio-primary" />  Document
                             </div>
                             <div className="items-center space-x-1">
-                                <input type="radio" value="not-document" {...register("parcelType")} className="radio radio-secondary" /> Not-Document
+                                <input
+                                    type="radio"
+                                    value="not-document"
+                                    {...register("type")}
+                                    className="radio radio-secondary" /> Not-Document
 
                             </div>
                         </div>
@@ -111,7 +183,12 @@ const Parcel = () => {
                             {/* Parcel Weight (KG) */}
                             <div className="space-y-1 text-sm">
                                 <label htmlFor="username" className="block font-bold dark:text-[#1f1f1f] text-lg">Parcel Weight (KG)</label>
-                                <input type="text" {...register('parcelWeight')} placeholder="Parcel Weight (KG)" className="w-full px-4 py-3 rounded-md dark:border-[#94A3B8] dark:text-[#1f1f1f] dark:bg-gray-200 font-medium focus:dark:border-violet-600" />
+                                <input
+                                    type="text"
+                                    {...register('parcelWeight')}
+                                    placeholder="Parcel Weight (KG)"
+                                    disabled={parcelType === "document"}
+                                    className="w-full px-4 py-3 rounded-md dark:border-[#94A3B8] dark:text-[#1f1f1f] dark:bg-gray-200 font-medium focus:dark:border-violet-600" />
                             </div>
                         </div>
                         <div className=" border border-b  border-dashed border-[#00000010] my-6"></div>
@@ -128,7 +205,7 @@ const Parcel = () => {
                                 {/* Sender Phone No */}
                                 <div className="space-y-1 text-sm">
                                     <label htmlFor="username" className="block font-bold dark:text-[#1f1f1f] text-lg">Sender Phone No</label>
-                                    <input type="text" {...register("senderPhoneNo")} placeholder="Sender Phone No" className="w-full px-4 py-3 rounded-md dark:border-[#94A3B8] dark:text-[#1f1f1f] dark:bg-gray-200 font-medium focus:dark:border-violet-600" />
+                                    <input type="number" {...register("senderPhoneNo")} placeholder="Sender Phone No" className="w-full px-4 py-3 rounded-md dark:border-[#94A3B8] dark:text-[#1f1f1f] dark:bg-gray-200 font-medium focus:dark:border-violet-600" />
                                 </div>
                                 {/*Address*/}
                                 <div className="space-y-1 text-sm">
@@ -175,7 +252,7 @@ const Parcel = () => {
                                 {/*Receiver Contact No */}
                                 <div className="space-y-1 text-sm">
                                     <label htmlFor="username" className="block font-bold dark:text-[#1f1f1f] text-lg">Receiver Contact No</label>
-                                    <input type="text" name="ReceiverContactNo" placeholder="Receiver Contact No" className="w-full px-4 py-3 rounded-md dark:border-[#94A3B8] dark:text-[#1f1f1f] dark:bg-gray-200 font-medium focus:dark:border-violet-600" />
+                                    <input type="number" {...register("receiverPhoneNo")} placeholder="Receiver Contact No" className="w-full px-4 py-3 rounded-md dark:border-[#94A3B8] dark:text-[#1f1f1f] dark:bg-gray-200 font-medium focus:dark:border-violet-600" />
                                 </div>
                                 {/*Receiver Address */}
                                 <div className="space-y-1 text-sm">

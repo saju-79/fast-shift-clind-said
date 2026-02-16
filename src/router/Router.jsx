@@ -13,13 +13,15 @@ import Parcel from "../pages/parcel/Parcel";
 import Covarage from "../pages/covarage/Covarage";
 import Error from "../component/Error";
 import PrivateRoute from "../private/PrivateRoute";
+import DashboardLayout from "../root/DashboardLayout";
+import Myorde from "../pages/dashbord/Myorde";
 
 
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element:<Layout></Layout>,
+        element: <Layout></Layout>,
         children: [
             {
                 path: '/',
@@ -44,14 +46,24 @@ export const router = createBrowserRouter([
             {
                 path: '/parcel',
                 element: <PrivateRoute><Parcel /></PrivateRoute>,
-                loader:()=>fetch('distric.json')
-                
+                loader: () => fetch('distric.json')
+
             },
             {
                 path: '/covarage',
                 element: <PrivateRoute><Covarage /></PrivateRoute>
             }
 
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+        children: [
+         {
+            path:"/dashboard",
+            element:<Myorde></Myorde>
+         }
         ]
     },
     {
@@ -75,6 +87,7 @@ export const router = createBrowserRouter([
                 Component: Error,
             }
         ]
-    }
+    },
+    
 
 ])
