@@ -1,19 +1,25 @@
 import React, { use } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, Navigate } from 'react-router';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router';
 import { AuthContextApi } from '../authContext/farebagseAurh/AuthContex';
 import Swal from 'sweetalert2';
 import SocalGoogle from './socalMdia/SocalGoogle';
 
 const Login = () => {
-    const { setUser, handelSignIn,user } = use(AuthContextApi)
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location?.state?.from || '/';
+    // console.log(from)
+    const { setUser, handelSignIn, user } = use(AuthContextApi)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {
         // console.log(data)
         const { email, password } = data;
         handelSignIn(email, password)
             .then(res => {
+
                 setUser(res.user)
+                navigate(from)
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -26,11 +32,13 @@ const Login = () => {
                 console.log(error)
             })
         reset()
+
     }
 
-    if(user){
-       return <Navigate to="/"></Navigate>
+    if (user) {
+        return <Navigate to={from}></Navigate>
     }
+
     return (
         <div className='text-start space-y-2 items-center'>
             <h1 className="text-5xl font-extrabold dark:text-[#1f1f1f]">Welcome Back</h1>
@@ -73,7 +81,7 @@ const Login = () => {
                 <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
             </div>
             <div className="  space-y-4">
-               <SocalGoogle text={`Login`}></SocalGoogle>
+                <SocalGoogle text={`Login`}></SocalGoogle>
             </div>
             <p className=" text-center  text-lg sm:px-6 dark:text-[#71717A]">Don't have an account?
                 <Link to='/register' rel="noopener noreferrer" href="#" className="underline dark:text-[#8FA748]">Register</Link>

@@ -1,11 +1,12 @@
 
 import ShareLogo from '../shareLayouts/ShareLogo';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink} from 'react-router';
 import Swal from 'sweetalert2';
 import AuthInfo from '../authContext/farebagseAurh/AuthInfo';
 // import { Link } from 'react-router';
 
 const Navber = () => {
+   
     const { user, handelSignOut } = AuthInfo()
 
     const handelout = () => {

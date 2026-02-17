@@ -15,6 +15,7 @@ import Error from "../component/Error";
 import PrivateRoute from "../private/PrivateRoute";
 import DashboardLayout from "../root/DashboardLayout";
 import Myorde from "../pages/dashbord/Myorde";
+import Payment from "../pages/dashbord/Payment/Payment";
 
 
 
@@ -60,10 +61,15 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
         children: [
-         {
-            path:"/dashboard",
-            element:<Myorde></Myorde>
-         }
+            {
+                index: true,
+                path: "/dashboard/my-parcels",
+                element: <Myorde></Myorde>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                Component: Payment,
+            }
         ]
     },
     {
@@ -88,6 +94,6 @@ export const router = createBrowserRouter([
             }
         ]
     },
-    
+
 
 ])

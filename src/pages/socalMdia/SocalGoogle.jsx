@@ -2,13 +2,20 @@ import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import AuthInfo from '../../authContext/farebagseAurh/AuthInfo';
 import Swal from 'sweetalert2';
+import { useLocation, useNavigate } from 'react-router';
 
 const SocalGoogle = ({text}) => {
+    const locatoion  =  useLocation();
+    const navigate = useNavigate();
+    const from = locatoion?.state?.from || '/';
+    // console.log(from ,'from google')
+    
     const { setUser, handelSignwithGoogle } = AuthInfo()
     const handelGoogle = () => {
         handelSignwithGoogle()
             .then(res => {
                 setUser(res.user)
+                navigate(from)
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -21,6 +28,7 @@ const SocalGoogle = ({text}) => {
                 console.log(error)
             })
     }
+    // navigate(from)
     return (
         <button onClick={handelGoogle} aria-label="Login with Google" type="button" className="flex font-extrabold py-3 border-none   dark:bg-[#E9ECF1] dark:text-[#1f1f1f] items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 focus:hidden  ">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="w-5 h-5 fill-current">
