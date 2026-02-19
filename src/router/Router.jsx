@@ -67,7 +67,7 @@ export const router = createBrowserRouter([
                 element: <Myorde></Myorde>
             },
             {
-                path: '/dashboard/payment/:id',
+                path: '/dashboard/payment/:parcelId',
                 Component: Payment,
             }
         ]

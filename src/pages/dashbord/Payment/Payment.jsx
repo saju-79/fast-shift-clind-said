@@ -1,11 +1,16 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
+import React from 'react';
 import { useParams } from 'react-router';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Loding from '../../../component/Loding';
+// import AuthInfo from '../../../authContext/farebagseAurh/AuthInfo';
 
 const Payment = () => {
+    // const {user} = AuthInfo();
     const { parcelId } = useParams();
     const axiosSecure = useAxiosSecure();
+    // const stripe = require("stripe");
+
 
     const { isLoading, data: parcel } = useQuery({
         queryKey: ['parcels', parcelId],
@@ -20,7 +25,7 @@ const Payment = () => {
             cost: parcel.cost,
             parcelId: parcel._id,
             senderEmail: parcel.senderEmail,
-            parcelName: parcel.parcelName
+            parcelName: parcel.parcelName,
         }
 
         const res = await axiosSecure.post('/create-checkout-session', paymentInfo);
@@ -31,15 +36,15 @@ const Payment = () => {
     }
 
     if (isLoading) {
-        return <div>
-            <span className="loading loading-infinity loading-xl"></span>
-        </div>
+        return <Loding></Loding>
     }
 
     return (
-        <div>
-            <h2>Please Pay ${parcel.cost} for : {parcel.parcelName} </h2>
-            <button onClick={handlePayment} className='btn btn-primary text-black'>Pay</button>
+        <div className=" flex items-center justify-center">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+                <h2 className="text-2xl font-bold text-center my-4">Please Pay ${parcel.cost} for : {parcel.parcelName} </h2>
+                <button onClick={handlePayment} className='btn bg-[#CAEB66] text-black font-bold w-full'>Pay</button>
+            </div>
         </div>
     );
 };

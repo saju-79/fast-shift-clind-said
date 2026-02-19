@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AuthContextApi } from './AuthContex';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { auth } from '../../firebase/firebage';
 import Loding from '../../component/Loding';
 
@@ -28,6 +28,10 @@ const AuthProvider = ({ children }) => {
     const handelSignwithGoogle = () => {
         return signInWithPopup(auth, provider)
     }
+    // update user profile in firebase
+    const updateUserProfile = (profile) => {
+        return updateProfile(auth.currentUser, profile)
+    }
     // courrent user
     useEffect(() => {
         const onscript = onAuthStateChanged(auth, (current) => {
@@ -45,6 +49,7 @@ const AuthProvider = ({ children }) => {
         handelSignUp,
         handelSignIn,
         handelSignOut,
+        updateUserProfile,
         handelSignwithGoogle,
     }
 

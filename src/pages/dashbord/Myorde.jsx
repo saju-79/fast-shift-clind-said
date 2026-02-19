@@ -25,7 +25,7 @@ const Myorde = () => {
     // console.log(parcels);
     const handlePayment = async (parcelId) => {
         navigate(`/dashboard/payment/${parcelId}`);
-        console.log(parcelId)
+        console.log(parcelId , "this is parcel id for paymet page navigation ")
         
     }
     // my parcel 

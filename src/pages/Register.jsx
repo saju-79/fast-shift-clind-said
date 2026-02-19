@@ -1,19 +1,47 @@
-import React, { use } from 'react';
-import { Link, Navigate } from 'react-router';
+import React, { use, useState } from 'react';
+import { Link, Navigate, useNavigate } from 'react-router';
 import userImsg from "/assets/image-upload-icon.png"
 import { useForm } from 'react-hook-form';
 import { AuthContextApi } from '../authContext/farebagseAurh/AuthContex';
 import Swal from 'sweetalert2';
 import SocalGoogle from './socalMdia/SocalGoogle';
+import axios from 'axios';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const Register = () => {
-    const { setUser, handelSignUp ,user } = use(AuthContextApi)
+    const axiosSecure  = useAxiosSecure();
+    const navigate = useNavigate();
+    const [profileImage, setProfileImage] = useState('');
+    const { setUser, handelSignUp, user, updateUserProfile } = use(AuthContextApi)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const onsubmit = data => {
         const { email, password } = data
         handelSignUp(email, password)
-            .then(res => {
+            .then(async(res) => {
                 setUser(res.user)
+                // update user profile  in the database
+                // create user in the database
+                const userInfo = {
+                    email: data.email,
+                    displayName: data.name,
+                    photoURL: profileImage
+                }
+                const rest  = await axiosSecure.post('/users', userInfo)
+                console.log(rest.data)
+
+                
+                   
+                // update user profile  in the firebase
+                updateUserProfile({ displayName: data.name, photoURL: profileImage })
+                    .then(() => {
+                        // Profile updated!
+                        // ...
+                        console.log("profile upadate ")
+                        navigate(location.state || '/');
+                    }).catch((error) => {
+                        // An error occurred
+                        console.log(error)
+                    })
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -25,12 +53,26 @@ const Register = () => {
             .catch(error => {
                 console.log(error)
             })
-
+ 
         reset()
     }
-    if(user){
-       return <Navigate to='/'></Navigate>
+    const handelFileChange = async (e) => {
+        const image = e.target.files[0];
+        // 1. store the image in form data
+        const formData = new FormData();
+        formData.append('image', image);
+
+        // 2. send the photo to store and get the ul
+        const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key}`;
+        const res = await axios.post(image_API_URL, formData);
+        setProfileImage(res.data.data.url)
+
+
     }
+    if (user) {
+        return <Navigate to='/'></Navigate>
+    }
+    // console.log(profileImage)
     return (
         <div className='text-start space-y-2 items-center'>
             <h1 className="text-5xl font-extrabold dark:text-[#1f1f1f]">Create an Account</h1>
@@ -41,7 +83,11 @@ const Register = () => {
             <form onSubmit={handleSubmit(onsubmit)} noValidate="" action="" className="self-stretch mt-2 space-y-5">
                 <div className="space-y-1 text-sm">
                     <img src={userImsg} alt="" />
-                    <input type="file" name="file" placeholder='' className="font-bold text-lg text-[#94a3bb] " />
+                    <input type="file"
+                        name="file"
+                        onChange={handelFileChange}
+                        placeholder='your profile piecture'
+                        className="font-bold text-lg text-[#94a3bb] " />
                     {/*  <label htmlFor="username" className="block font-bold dark:text-[#1f1f1f] text-lg">Name</label>
                     <input type="text" name="username" placeholder="Name" className="w-full px-4 py-3 rounded-md dark:border-[#94A3B8] dark:text-[#1f1f1f] dark:bg-gray-200 font-medium focus:dark:border-violet-600" /> */}
                 </div>
@@ -87,7 +133,7 @@ const Register = () => {
                 <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
             </div>
             <div className="  space-y-4">
-              <SocalGoogle text={'Register'}></SocalGoogle>
+                <SocalGoogle text={'Register'}></SocalGoogle>
             </div>
             <p className=" text-center  text-lg sm:px-6 dark:text-[#71717A]">Already have an account?
                 <Link to='/login' rel="noopener noreferrer" href="#" className="underline dark:text-[#8FA748]">Login</Link>
