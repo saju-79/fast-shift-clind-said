@@ -1,5 +1,5 @@
 import React, { use, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router';
 import userImsg from "/assets/image-upload-icon.png"
 import { useForm } from 'react-hook-form';
 import { AuthContextApi } from '../authContext/farebagseAurh/AuthContex';
@@ -9,15 +9,18 @@ import axios from 'axios';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const Register = () => {
-    const axiosSecure  = useAxiosSecure();
+    const location =  useLocation();
     const navigate = useNavigate();
+    const from = location?.state?.from ||"/"
+    // console.log(from)
+    const axiosSecure = useAxiosSecure();
     const [profileImage, setProfileImage] = useState('');
     const { setUser, handelSignUp, user, updateUserProfile } = use(AuthContextApi)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const onsubmit = data => {
         const { email, password } = data
         handelSignUp(email, password)
-            .then(async(res) => {
+            .then(async (res) => {
                 setUser(res.user)
                 // update user profile  in the database
                 // create user in the database
@@ -26,18 +29,18 @@ const Register = () => {
                     displayName: data.name,
                     photoURL: profileImage
                 }
-                const rest  = await axiosSecure.post('/users', userInfo)
+                const rest = await axiosSecure.post('/users', userInfo)
                 console.log(rest.data)
 
-                
-                   
+
+
                 // update user profile  in the firebase
                 updateUserProfile({ displayName: data.name, photoURL: profileImage })
                     .then(() => {
                         // Profile updated!
                         // ...
                         console.log("profile upadate ")
-                        navigate(location.state || '/');
+                        navigate(from);
                     }).catch((error) => {
                         // An error occurred
                         console.log(error)
@@ -53,7 +56,7 @@ const Register = () => {
             .catch(error => {
                 console.log(error)
             })
- 
+
         reset()
     }
     const handelFileChange = async (e) => {
@@ -70,7 +73,7 @@ const Register = () => {
 
     }
     if (user) {
-        return <Navigate to='/'></Navigate>
+        return <Navigate to={from}></Navigate>
     }
     // console.log(profileImage)
     return (

@@ -21,6 +21,7 @@ import CompletedDeliveries from "../pages/dashbord/rider/CompletedDeliveries";
 import ApproveRiders from "../pages/dashbord/Payment/ApproveRiders";
 import AssignRiders from "../pages/dashbord/rider/AssignRiders";
 import ActiveRider from "../pages/dashbord/rider/ActiveRider";
+import PendingRiders from "../pages/dashbord/rider/PendingRiders";
 
 
 
@@ -123,6 +124,10 @@ export const router = createBrowserRouter([
             {
                 path: 'approve-riders',
                 element: <ApproveRiders></ApproveRiders>
+            },
+            {
+                path: 'pending-riders',
+                element: <PendingRiders></PendingRiders>
             },
             {
                 path: "active-riders",

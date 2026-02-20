@@ -4,6 +4,7 @@ import { FaMotorcycle, FaRegCreditCard, FaTasks, FaUserCheck, FaUsers } from 're
 import { Link, NavLink, Outlet } from 'react-router';
 import { RiEBikeFill } from 'react-icons/ri';
 import { SiGoogletasks } from 'react-icons/si';
+import { AiOutlineUserDelete } from 'react-icons/ai';
 
 const DashboardLayout = () => {
 
@@ -32,7 +33,8 @@ const DashboardLayout = () => {
                         {/* List item */}
                         <li>
                             <Link
-                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage"
+                                className={({ isActive }) => isActive ? "is-drawer-close:tooltip is-drawer-close:tooltip-right bg-[#CAEB66] text-[#000000] " : "text-sm md:text-lg lg:text-lg font-semibold text-[#000000] hover:bg-[#CAEB6670]"}
+                                data-tip="Homepage"
                                 to="/">
                                 {/* Home icon */}
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
@@ -43,7 +45,10 @@ const DashboardLayout = () => {
                         {/* our dashboard links */}
                         <li>
                             <NavLink
-                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyParcels"
+                                className={({ isActive }) => isActive ?
+                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                data-tip="MyParcels"
                                 to="/dashboard/my-parcels">
                                 <CiDeliveryTruck />
                                 <span className="is-drawer-close:hidden">My Parcels</span>
@@ -51,7 +56,10 @@ const DashboardLayout = () => {
                         </li>
                         <li>
                             <NavLink
-                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History"
+                                className={({ isActive }) => isActive ?
+                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                data-tip="Payment History"
                                 to="/dashboard/payment-history">
                                 <FaRegCreditCard />
                                 <span className="is-drawer-close:hidden">Payment History</span>
@@ -60,7 +68,10 @@ const DashboardLayout = () => {
                         {/* rider section */}
                         <li>
                             <NavLink
-                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Assigned Deliveries"
+                                className={({ isActive }) => isActive ?
+                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                data-tip="Assigned Deliveries"
                                 to="/dashboard/assigned-deliveries">
                                 <FaTasks />
                                 <span className="is-drawer-close:hidden">Assigned Deliveries</span>
@@ -68,7 +79,10 @@ const DashboardLayout = () => {
                         </li>
                         <li>
                             <NavLink
-                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Completed Deliveries"
+                                className={({ isActive }) => isActive ?
+                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                data-tip="Completed Deliveries"
                                 to="/dashboard/completed-deliveries">
                                 <SiGoogletasks />
                                 <span className="is-drawer-close:hidden">Completed Deliveries</span>
@@ -81,8 +95,12 @@ const DashboardLayout = () => {
 
                         <li>
                             <NavLink
-                            // clss 5 rided rilated links
-                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve Riders"
+
+                                // clss 5 rided rilated links
+                                className={({ isActive }) => isActive ?
+                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                data-tip="Approve Riders"
                                 to="/dashboard/approve-riders">
                                 <FaMotorcycle />
                                 <span className="is-drawer-close:hidden">Approve Riders</span>
@@ -90,24 +108,46 @@ const DashboardLayout = () => {
                         </li>
                         <li>
                             <NavLink
-                            // clss 5 rided rilated links
-                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Active Riders"
+                                // clss 5 rided rilated links
+                                className={({ isActive }) => isActive ?
+                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                data-tip="Pending Riders"
+                                to="/dashboard/pending-riders">
+                                <AiOutlineUserDelete />
+                                <span className="is-drawer-close:hidden">Pending Riders</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                // clss 5 rided rilated links
+                                className={({ isActive }) => isActive ?
+                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                data-tip="Active Riders"
                                 to="/dashboard/active-riders">
                                 <FaUserCheck />
                                 <span className="is-drawer-close:hidden">Active Riders</span>
                             </NavLink>
                         </li>
+
                         <li>
                             <NavLink
-                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Assign Riders"
+                                className={({ isActive }) => isActive ?
+                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                data-tip="Assign Riders"
                                 to="/dashboard/assign-riders">
-                                <RiEBikeFill/>
+                                <RiEBikeFill />
                                 <span className="is-drawer-close:hidden">Assign Riders</span>
                             </NavLink>
                         </li>
                         <li>
                             <NavLink
-                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Users Management"
+                                className={({ isActive }) => isActive ?
+                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                data-tip="Users Management"
                                 to="/dashboard/users-management">
                                 <FaUsers></FaUsers>
                                 <span className="is-drawer-close:hidden">Users Management</span>
@@ -117,7 +157,11 @@ const DashboardLayout = () => {
 
                         {/* List item */}
                         <li>
-                            <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
+                            <button
+                                className={({ isActive }) => isActive ?
+                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                data-tip="Settings">
                                 {/* Settings icon */}
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg>
                                 <span className="is-drawer-close:hidden">Settings</span>

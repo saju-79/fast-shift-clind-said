@@ -1,9 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loding from "../../../component/Loding";
+import Swal from "sweetalert2";
+import { FaTrashCan } from "react-icons/fa6";
 
-const ActiveRider = () => {
+
+const ActiveRiders = () => {
+
     const axiosSecure = useAxiosSecure();
+    const queryClient = useQueryClient();
 
     const { data: riders = [], isLoading } = useQuery({
         queryKey: ['riders', 'approved'],
@@ -13,35 +18,72 @@ const ActiveRider = () => {
         }
     });
 
-    if (isLoading) return <Loding></Loding>
+    if (isLoading) return <Loding></Loding>;
+    const handleDelete = async (rider) => {
+
+        const confirm = await Swal.fire({
+            title: "Delete this rider?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes"
+        });
+
+        if (!confirm.isConfirmed) return;
+
+        const res = await axiosSecure.delete(`/riders/${rider._id}`);
+
+        if (res.data.deletedCount > 0) {
+
+            queryClient.invalidateQueries(['riders', 'pending']);
+
+            Swal.fire({
+                icon: "success",
+                title: "Deleted",
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
+    };
 
     return (
-        <div>
-            <h2 className="text-2xl font-bold text-[#03373D]">
-                Active Riders:
-                <span className="text-green-600 ml-2">{riders.length}</span>
-            </h2>
+        <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">Active Riders <span className="text-lg text-green-500 font-bold">({riders.length})</span></h2>
 
-            <div className="overflow-x-auto mt-5">
-                <table className="table table-zebra">
-                    <thead>
+            <div className="overflow-x-auto bg-white shadow rounded-xl">
+                <table className="table w-full">
+                    <thead className="bg-gray-100">
                         <tr>
-                            <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>District</th>
+                            <th>district</th>
                             <th>Status</th>
+                            <td>action</td>
+
                         </tr>
                     </thead>
+
                     <tbody>
-                        {riders.map((rider, index) => (
+                        {riders.map(rider => (
                             <tr key={rider._id}>
-                                <td>{index + 1}</td>
                                 <td>{rider.name}</td>
                                 <td>{rider.email}</td>
                                 <td>{rider.district}</td>
-                                <td className="text-green-600 font-semibold">
-                                    {rider.status}
+                                <td>
+                                    <span className="badge bg-green-500 text-white">
+                                        Approved
+                                    </span>
+
+                                    {/*  <button
+                                        className="badge bg-red-300 text-white items-center text-center justify-center flex ml-2">
+                                        {rider.status === "pending" ? "pending" : rider.status}
+                                    </button> */}
+                                </td>
+                                <td>
+                                    <button
+                                        onClick={() => handleDelete(rider)}
+                                        className="badge bg-red-300 hover:bg-red-700 text-white items-center text-center justify-center flex ml-2">
+                                        <FaTrashCan />
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -52,4 +94,4 @@ const ActiveRider = () => {
     );
 };
 
-export default ActiveRider;
+export default ActiveRiders;

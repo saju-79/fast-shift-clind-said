@@ -9,7 +9,7 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const from = location?.state?.from || '/';
-    // console.log(from)
+    console.log(from)
     const { setUser, handelSignIn, user } = use(AuthContextApi)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {
@@ -84,7 +84,7 @@ const Login = () => {
                 <SocalGoogle text={`Login`}></SocalGoogle>
             </div>
             <p className=" text-center  text-lg sm:px-6 dark:text-[#71717A]">Don't have an account?
-                <Link to='/register' rel="noopener noreferrer" href="#" className="underline dark:text-[#8FA748]">Register</Link>
+                <Link state={{from}} to='/register' rel="noopener noreferrer" href="#" className="underline dark:text-[#8FA748]">Register</Link>
             </p>
         </div>
     );
