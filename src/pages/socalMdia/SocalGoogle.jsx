@@ -3,19 +3,29 @@ import { FcGoogle } from 'react-icons/fc';
 import AuthInfo from '../../authContext/farebagseAurh/AuthInfo';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
-const SocalGoogle = ({text}) => {
-    const locatoion  =  useLocation();
+const SocalGoogle = ({ text }) => {
+    const axiosSecure = useAxiosSecure();
+    const locatoion = useLocation();
     const navigate = useNavigate();
     const from = locatoion?.state?.from || '/';
     // console.log(from ,'from google')
-    
+
     const { setUser, handelSignwithGoogle } = AuthInfo()
     const handelGoogle = () => {
         handelSignwithGoogle()
-            .then(res => {
+            .then(  async (res) => {
                 setUser(res.user)
                 navigate(from)
+                console.log(res.user, "google user");
+                const userInfo = {
+                    email: res.user.email,
+                    displayName: res.user.displayName,
+                    photoURL: res.user.photoURL
+                }
+                const rest = await axiosSecure.post('/users', userInfo)
+                console.log(rest.data)
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
