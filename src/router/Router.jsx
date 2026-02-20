@@ -20,6 +20,7 @@ import AssignedDeliveries from "../pages/dashbord/rider/AssignedDeliveries";
 import CompletedDeliveries from "../pages/dashbord/rider/CompletedDeliveries";
 import ApproveRiders from "../pages/dashbord/Payment/ApproveRiders";
 import AssignRiders from "../pages/dashbord/rider/AssignRiders";
+import ActiveRider from "../pages/dashbord/rider/ActiveRider";
 
 
 
@@ -87,51 +88,55 @@ export const router = createBrowserRouter([
     {
         path: 'dashboard',
         element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
-         children: [
-      {
-        path: 'my-parcels', 
-        Component: Myorde
-      },
-      {
-        path: 'payment/:parcelId',
-        Component: Payment
-      }, 
-     /*  {
-        path: 'payment-history',
-        Component: PaymentHistory
-      }, */
-     /*  {
-        path: 'payment-success',
-        Component: PaymentSuccess
-      },  */
-     /*  {
-        path: 'payment-cancelled', 
-        Component: PaymentCancelled
-      },  */
-      // rider only routes
-      {
-        path: 'assigned-deliveries',
-        element: <AssignedDeliveries></AssignedDeliveries>
-      },
-      {
-        path: 'completed-deliveries',
-        element: <CompletedDeliveries></CompletedDeliveries>
-      },
+        children: [
+            {
+                path: 'my-parcels',
+                Component: Myorde
+            },
+            {
+                path: 'payment/:parcelId',
+                Component: Payment
+            },
+            /*  {
+               path: 'payment-history',
+               Component: PaymentHistory
+             }, */
+            /*  {
+               path: 'payment-success',
+               Component: PaymentSuccess
+             },  */
+            /*  {
+               path: 'payment-cancelled', 
+               Component: PaymentCancelled
+             },  */
+            // rider only routes
+            {
+                path: 'assigned-deliveries',
+                element: <AssignedDeliveries></AssignedDeliveries>
+            },
+            {
+                path: 'completed-deliveries',
+                element: <CompletedDeliveries></CompletedDeliveries>
+            },
 
-      // admin only routes
-      {
-        path: 'approve-riders',
-        element: <ApproveRiders></ApproveRiders>
-      }, 
-       {
-        path: 'assign-riders',
-        element: <AssignRiders></AssignRiders>
-      }, 
-      /* {
-        path: 'users-management',
-        element: <UsersManagement></UsersManagement>
-      } */
-    ]
+            // admin only routes
+            {
+                path: 'approve-riders',
+                element: <ApproveRiders></ApproveRiders>
+            },
+            {
+                path: "active-riders",
+                element: <ActiveRider></ActiveRider>
+            },
+            {
+                path: 'assign-riders',
+                element: <AssignRiders></AssignRiders>
+            },
+            /* {
+              path: 'users-management',
+              element: <UsersManagement></UsersManagement>
+            } */
+        ]
     }
 
 ])

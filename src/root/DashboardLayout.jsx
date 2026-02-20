@@ -1,6 +1,6 @@
 import React from 'react';
 import { CiDeliveryTruck } from 'react-icons/ci';
-import { FaMotorcycle, FaRegCreditCard, FaTasks, FaUsers } from 'react-icons/fa';
+import { FaMotorcycle, FaRegCreditCard, FaTasks, FaUserCheck, FaUsers } from 'react-icons/fa';
 import { Link, NavLink, Outlet } from 'react-router';
 import { RiEBikeFill } from 'react-icons/ri';
 import { SiGoogletasks } from 'react-icons/si';
@@ -86,6 +86,15 @@ const DashboardLayout = () => {
                                 to="/dashboard/approve-riders">
                                 <FaMotorcycle />
                                 <span className="is-drawer-close:hidden">Approve Riders</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                            // clss 5 rided rilated links
+                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Active Riders"
+                                to="/dashboard/active-riders">
+                                <FaUserCheck />
+                                <span className="is-drawer-close:hidden">Active Riders</span>
                             </NavLink>
                         </li>
                         <li>
