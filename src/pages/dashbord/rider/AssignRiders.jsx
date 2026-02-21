@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useRef, useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import Loding from '../../../component/Loding';
 
 const AssignRiders = () => {
     const [selectedParcel, setSelectedParcel] = useState(null);
@@ -17,7 +18,7 @@ const AssignRiders = () => {
     })
 
     // todo: invalidate query after assigning a rider
-    const { data: riders = [] } = useQuery({
+    const { data: riders = []   , isLoading} = useQuery({
         queryKey: ['riders', selectedParcel?.senderDistrict, 'available'],
         enabled: !!selectedParcel,
         queryFn: async () => {
@@ -54,10 +55,11 @@ const AssignRiders = () => {
                 }
             })
     }
+    if(isLoading) return <Loding></Loding>
 
     return (
         <div>
-            <h2 className="text-5xl">Assign Riders: {parcels.length}</h2>
+            <h2 className="text-2xl">Assign Riders: {parcels.length}</h2>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     {/* head */}

@@ -12,7 +12,7 @@ const ApproveRiders = () => {
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
 
-    const { data: riders = [], isLoading } = useQuery({
+    const { data: riders = [], isLoading, refetch } = useQuery({
         queryKey: ['riders', 'pending'],
         queryFn: async () => {
             const res = await axiosSecure.get('/riders?status=pending');
@@ -33,16 +33,15 @@ const ApproveRiders = () => {
         });
 
         if (!confirm.isConfirmed) return;
-
         const res = await axiosSecure.patch(`/riders/${rider._id}`, {
-            status: "approved"
+            status: "approved",
+            email: rider.email
         });
-
         if (res.data.modifiedCount > 0) {
-
+            refetch()
             // 🔥 refresh both pending & approved
-            queryClient.invalidateQueries(['riders', 'pending']);
             queryClient.invalidateQueries(['riders', 'approved']);
+            queryClient.invalidateQueries(['riders', 'pending']);
 
             Swal.fire({
                 icon: "success",

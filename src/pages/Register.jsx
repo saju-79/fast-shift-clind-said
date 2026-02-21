@@ -9,9 +9,9 @@ import axios from 'axios';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const Register = () => {
-    const location =  useLocation();
+    const location = useLocation();
     const navigate = useNavigate();
-    const from = location?.state?.from ||"/"
+    const from = location?.state?.from || "/"
     // console.log(from)
     const axiosSecure = useAxiosSecure();
     const [profileImage, setProfileImage] = useState('');

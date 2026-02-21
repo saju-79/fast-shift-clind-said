@@ -2,6 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { FaUserCheck } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loding from "../../../component/Loding";
 
 const PendingRiders = () => {
 
@@ -40,7 +41,7 @@ const PendingRiders = () => {
         }
     };
 
-    if (isLoading) return <p className="text-center">Loading...</p>;
+    if (isLoading) return <Loding></Loding>;
 
     return (
         <div className="p-6">
