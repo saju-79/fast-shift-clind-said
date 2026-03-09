@@ -1,12 +1,12 @@
 
 import ShareLogo from '../shareLayouts/ShareLogo';
-import { Link, NavLink} from 'react-router';
+import { Link, NavLink } from 'react-router';
 import Swal from 'sweetalert2';
 import AuthInfo from '../authContext/farebagseAurh/AuthInfo';
 // import { Link } from 'react-router';
 
 const Navber = () => {
-   
+
     const { user, handelSignOut } = AuthInfo()
 
     const handelout = () => {
@@ -63,16 +63,33 @@ const Navber = () => {
                     {naveItems}
                 </ul>
             </div>
-            <div className="navbar-end gap-2">
-                {
-                    user?.email ? <>
-                        <button onClick={handelout} className='text-[#1f1f1f] text-sm md:text-lg lg:text-xl rounded-[ 12px]  px-6 py-4  btn bg-[#CAEB66]'>Sign Out</button>
-                    </> : <>
-                        <Link to='/login'> <button className='text-[#606060] text-sm md:text-lg lg:text-xl rounded-[ 12px]  px-6 py-4  btn bg-[#ffffff60]'>Sign In </button></Link>
-                        <Link to='/register'><button className='text-[#1F1F1F] text-sm md:text-lg lg:text-xl rounded-[ 12px]  px-6 py-4  btn bg-[#CAEB66]'>Sign Up</button></Link>
-                    </>
-                }
-            </div>
+            {
+                user?.email ? <>
+                    <div className="navbar-end gap-1 ">
+                        <div className="flex items-center  gap-3">
+                            <div className='hidden md:block'>
+                                <Link to='dashboard/profile'>
+                                    {/* Avatar */}
+                                    <img
+                                        className='rounded-full'
+                                        referrerPolicy='no-referrer'
+                                        src={user && user.photoURL}
+                                        alt='profile'
+                                        height='30'
+                                        width='30'
+                                    />
+                                </Link>
+                            </div>
+                            <div className="">
+                                <button onClick={handelout} className='text-[#1f1f1f] text-sm md:text-lg lg:text-xl rounded-[ 12px]  px-6 py-4  btn bg-[#CAEB66]'>Sign Out</button>
+                            </div>
+                        </div>
+                    </div>
+                </> : <>
+                    <Link to='/login'> <button className='text-[#606060] text-sm md:text-lg lg:text-xl rounded-[ 12px]  px-6 py-4  btn bg-[#ffffff60]'>Sign In </button></Link>
+                    <Link to='/register'><button className='text-[#1F1F1F] text-sm md:text-lg lg:text-xl rounded-[ 12px]  px-6 py-4  btn bg-[#CAEB66]'>Sign Up</button></Link>
+                </>
+            }
         </div>
     );
 };

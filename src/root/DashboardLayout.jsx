@@ -5,11 +5,12 @@ import { Link, NavLink, Outlet } from 'react-router';
 import { RiEBikeFill } from 'react-icons/ri';
 import { SiGoogletasks } from 'react-icons/si';
 import { AiOutlineUserDelete } from 'react-icons/ai';
+import { CgProfile } from "react-icons/cg";
 import useRole from '../pages/Forbidden/useRole';
 import Loding from '../component/Loding';
 
 const DashboardLayout = () => {
-    const { role ,  roleLoading } = useRole()
+    const { role, roleLoading } = useRole()
     // if(roleLoading)return <Loding></Loding>
     console.log(role)
 
@@ -72,31 +73,31 @@ const DashboardLayout = () => {
                         </li>
                         {/* rider section */}
                         {
-                           !roleLoading && role === "rider" &&
-                                <>
-                                    <li>
-                                        <NavLink
-                                            className={({ isActive }) => isActive ?
-                                                "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
-                                                "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
-                                            data-tip="Assigned Deliveries"
-                                            to="/dashboard/assigned-deliveries">
-                                            <FaTasks />
-                                            <span className="is-drawer-close:hidden">Assigned Deliveries</span>
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink
-                                            className={({ isActive }) => isActive ?
-                                                "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
-                                                "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
-                                            data-tip="Completed Deliveries"
-                                            to="/dashboard/completed-deliveries">
-                                            <SiGoogletasks />
-                                            <span className="is-drawer-close:hidden">Completed Deliveries</span>
-                                        </NavLink>
-                                    </li>
-                                </> 
+                            !roleLoading && role === "rider" &&
+                            <>
+                                <li>
+                                    <NavLink
+                                        className={({ isActive }) => isActive ?
+                                            "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                            "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                        data-tip="Assigned Deliveries"
+                                        to="/dashboard/assigned-deliveries">
+                                        <FaTasks />
+                                        <span className="is-drawer-close:hidden">Assigned Deliveries</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        className={({ isActive }) => isActive ?
+                                            "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                            "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                        data-tip="Completed Deliveries"
+                                        to="/dashboard/completed-deliveries">
+                                        <SiGoogletasks />
+                                        <span className="is-drawer-close:hidden">Completed Deliveries</span>
+                                    </NavLink>
+                                </li>
+                            </>
                         }
 
 
@@ -165,9 +166,19 @@ const DashboardLayout = () => {
                                         <span className="is-drawer-close:hidden">Users Management</span>
                                     </NavLink>
                                 </li>
-                            </> 
+                            </>
                         }
-
+                        <li>
+                            <NavLink
+                                className={({ isActive }) => isActive ?
+                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                data-tip="MyParcels"
+                                to="/dashboard/profile">
+                                <CgProfile />
+                                <span className="is-drawer-close:hidden">Profile</span>
+                            </NavLink>
+                        </li>
 
                         {/* List item */}
                         <li>

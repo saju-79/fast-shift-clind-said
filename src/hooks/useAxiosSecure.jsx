@@ -4,7 +4,7 @@ import AuthInfo from "../authContext/farebagseAurh/AuthInfo";
 import { useNavigate } from "react-router";
 
 const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://fast-shift-server-said.vercel.app",
 });
 
 const useAxiosSecure = () => {

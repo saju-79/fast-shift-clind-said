@@ -25,6 +25,7 @@ import PendingRiders from "../pages/dashbord/rider/PendingRiders";
 import UsersManagement from "../pages/userAdmin/UsersManagement";
 import Forbidden from "../pages/Forbidden/Forbidden";
 import RiderRoute from "./RiderRoute";
+import Profile from "../shareLayouts/Profile";
 
 
 
@@ -65,8 +66,8 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute><Covarage /></PrivateRoute>
             },
             {
-                path:"/Forbidden",
-                Component:Forbidden
+                path: "/Forbidden",
+                Component: Forbidden
             }
 
         ]
@@ -145,8 +146,12 @@ export const router = createBrowserRouter([
                 element: <AssignRiders></AssignRiders>
             },
             {
-              path: 'users-management',
-              element: <UsersManagement></UsersManagement>
+                path: 'users-management',
+                element: <UsersManagement></UsersManagement>
+            },
+            {
+                path: 'profile',
+                element: <Profile></Profile>
             },
         ]
     }
