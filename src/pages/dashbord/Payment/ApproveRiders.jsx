@@ -37,8 +37,9 @@ const ApproveRiders = () => {
             status: "approved",
             email: rider.email
         });
+        refetch()
+
         if (res.data.modifiedCount > 0) {
-            refetch()
             // 🔥 refresh both pending & approved
             queryClient.invalidateQueries(['riders', 'approved']);
             queryClient.invalidateQueries(['riders', 'pending']);

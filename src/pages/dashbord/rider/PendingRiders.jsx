@@ -55,6 +55,7 @@ const PendingRiders = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>District</th>
+                            <th>Joined Date</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -67,6 +68,11 @@ const PendingRiders = () => {
                                 <td>{rider.name}</td>
                                 <td>{rider.email}</td>
                                 <td>{rider.district}</td>
+                                <td>
+                                    {rider.createdAt
+                                        ? new Date(rider.createdAt).toLocaleString()
+                                        : "N/A"}
+                                </td>
                                 <td >
                                     <span className="badge bg-red-300 text-white items-center text-center justify-center flex">
                                         {rider.status === "pending" ? "pending" : rider.status}

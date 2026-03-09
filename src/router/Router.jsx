@@ -22,6 +22,9 @@ import ApproveRiders from "../pages/dashbord/Payment/ApproveRiders";
 import AssignRiders from "../pages/dashbord/rider/AssignRiders";
 import ActiveRider from "../pages/dashbord/rider/ActiveRider";
 import PendingRiders from "../pages/dashbord/rider/PendingRiders";
+import UsersManagement from "../pages/userAdmin/UsersManagement";
+import Forbidden from "../pages/Forbidden/Forbidden";
+import RiderRoute from "./RiderRoute";
 
 
 
@@ -60,6 +63,10 @@ export const router = createBrowserRouter([
             {
                 path: '/covarage',
                 element: <PrivateRoute><Covarage /></PrivateRoute>
+            },
+            {
+                path:"/Forbidden",
+                Component:Forbidden
             }
 
         ]
@@ -113,11 +120,11 @@ export const router = createBrowserRouter([
             // rider only routes
             {
                 path: 'assigned-deliveries',
-                element: <AssignedDeliveries></AssignedDeliveries>
+                element: <RiderRoute><AssignedDeliveries></AssignedDeliveries></RiderRoute>
             },
             {
                 path: 'completed-deliveries',
-                element: <CompletedDeliveries></CompletedDeliveries>
+                element: <RiderRoute><CompletedDeliveries></CompletedDeliveries></RiderRoute>
             },
 
             // admin only routes
@@ -137,10 +144,10 @@ export const router = createBrowserRouter([
                 path: 'assign-riders',
                 element: <AssignRiders></AssignRiders>
             },
-            /* {
+            {
               path: 'users-management',
               element: <UsersManagement></UsersManagement>
-            } */
+            },
         ]
     }
 

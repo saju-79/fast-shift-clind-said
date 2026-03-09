@@ -9,7 +9,7 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const from = location?.state?.from || '/';
-    console.log(from)
+    // console.log(from)
     const { setUser, handelSignIn, user } = use(AuthContextApi)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {

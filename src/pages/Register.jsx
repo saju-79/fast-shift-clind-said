@@ -17,48 +17,48 @@ const Register = () => {
     const [profileImage, setProfileImage] = useState('');
     const { setUser, handelSignUp, user, updateUserProfile } = use(AuthContextApi)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const onsubmit = data => {
-        const { email, password } = data
-        handelSignUp(email, password)
-            .then(async (res) => {
-                setUser(res.user)
-                // update user profile  in the database
-                // create user in the database
-                const userInfo = {
-                    email: data.email,
-                    displayName: data.name,
-                    photoURL: profileImage
-                }
-                const rest = await axiosSecure.post('/users', userInfo)
-                console.log(rest.data)
+    const onsubmit = async (data) => {
+        try {
+            const { email, password } = data;
 
+            // 1️⃣ Firebase SignUp
+            const res = await handelSignUp(email, password);
+            setUser(res.user);
 
+            // 2️⃣ Update Firebase Profile
+            await updateUserProfile({
+                displayName: data.name,
+                photoURL: profileImage,
+            });
 
-                // update user profile  in the firebase
-                updateUserProfile({ displayName: data.name, photoURL: profileImage })
-                    .then(() => {
-                        // Profile updated!
-                        // ...
-                        console.log("profile upadate ")
-                        navigate(from);
-                    }).catch((error) => {
-                        // An error occurred
-                        console.log(error)
-                    })
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "successful Sign Up ",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            })
-            .catch(error => {
-                console.log(error)
-            })
+            // 3️⃣ Save user in DB
+            const userInfo = {
+                email: data.email,
+                displayName: data.name,
+                photoURL: profileImage,
+            };
 
-        reset()
-    }
+            await axiosSecure.post("/users", userInfo);
+
+            // 4️⃣ (Optional) Patch photo again if needed
+            await axiosSecure.patch(`/users/photo/${data.email}`, {
+                photoURL: profileImage,
+            });
+
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Successful Sign Up",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+
+            navigate(from);
+            reset();
+        } catch (error) {
+            console.log(error);
+        }
+    };
     const handelFileChange = async (e) => {
         const image = e.target.files[0];
         // 1. store the image in form data

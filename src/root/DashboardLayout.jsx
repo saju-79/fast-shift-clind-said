@@ -5,8 +5,13 @@ import { Link, NavLink, Outlet } from 'react-router';
 import { RiEBikeFill } from 'react-icons/ri';
 import { SiGoogletasks } from 'react-icons/si';
 import { AiOutlineUserDelete } from 'react-icons/ai';
+import useRole from '../pages/Forbidden/useRole';
+import Loding from '../component/Loding';
 
 const DashboardLayout = () => {
+    const { role ,  roleLoading } = useRole()
+    // if(roleLoading)return <Loding></Loding>
+    console.log(role)
 
     return (
         <div className="drawer lg:drawer-open max-w-7xl mx-auto ">
@@ -66,93 +71,102 @@ const DashboardLayout = () => {
                             </NavLink>
                         </li>
                         {/* rider section */}
-                        <li>
-                            <NavLink
-                                className={({ isActive }) => isActive ?
-                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
-                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
-                                data-tip="Assigned Deliveries"
-                                to="/dashboard/assigned-deliveries">
-                                <FaTasks />
-                                <span className="is-drawer-close:hidden">Assigned Deliveries</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                className={({ isActive }) => isActive ?
-                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
-                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
-                                data-tip="Completed Deliveries"
-                                to="/dashboard/completed-deliveries">
-                                <SiGoogletasks />
-                                <span className="is-drawer-close:hidden">Completed Deliveries</span>
-                            </NavLink>
-                        </li>
+                        {
+                           !roleLoading && role === "rider" &&
+                                <>
+                                    <li>
+                                        <NavLink
+                                            className={({ isActive }) => isActive ?
+                                                "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                                "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                            data-tip="Assigned Deliveries"
+                                            to="/dashboard/assigned-deliveries">
+                                            <FaTasks />
+                                            <span className="is-drawer-close:hidden">Assigned Deliveries</span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            className={({ isActive }) => isActive ?
+                                                "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                                "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                            data-tip="Completed Deliveries"
+                                            to="/dashboard/completed-deliveries">
+                                            <SiGoogletasks />
+                                            <span className="is-drawer-close:hidden">Completed Deliveries</span>
+                                        </NavLink>
+                                    </li>
+                                </> 
+                        }
 
 
 
                         {/* admin only links */}
 
-                        <li>
-                            <NavLink
+                        {
+                            !roleLoading && role === 'user' && <>
+                                <li>
+                                    <NavLink
 
-                                // clss 5 rided rilated links
-                                className={({ isActive }) => isActive ?
-                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
-                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
-                                data-tip="Approve Riders"
-                                to="/dashboard/approve-riders">
-                                <FaMotorcycle />
-                                <span className="is-drawer-close:hidden">Approve Riders</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                // clss 5 rided rilated links
-                                className={({ isActive }) => isActive ?
-                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
-                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
-                                data-tip="Pending Riders"
-                                to="/dashboard/pending-riders">
-                                <AiOutlineUserDelete />
-                                <span className="is-drawer-close:hidden">Pending Riders</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                // clss 5 rided rilated links
-                                className={({ isActive }) => isActive ?
-                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
-                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
-                                data-tip="Active Riders"
-                                to="/dashboard/active-riders">
-                                <FaUserCheck />
-                                <span className="is-drawer-close:hidden">Active Riders</span>
-                            </NavLink>
-                        </li>
+                                        // clss 5 rided rilated links
+                                        className={({ isActive }) => isActive ?
+                                            "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                            "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                        data-tip="Approve Riders"
+                                        to="/dashboard/approve-riders">
+                                        <FaMotorcycle />
+                                        <span className="is-drawer-close:hidden">Approve Riders</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        // clss 5 rided rilated links
+                                        className={({ isActive }) => isActive ?
+                                            "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                            "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                        data-tip="Pending Riders"
+                                        to="/dashboard/pending-riders">
+                                        <AiOutlineUserDelete />
+                                        <span className="is-drawer-close:hidden">Pending Riders</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        // clss 5 rided rilated links
+                                        className={({ isActive }) => isActive ?
+                                            "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                            "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                        data-tip="Active Riders"
+                                        to="/dashboard/active-riders">
+                                        <FaUserCheck />
+                                        <span className="is-drawer-close:hidden">Active Riders</span>
+                                    </NavLink>
+                                </li>
 
-                        <li>
-                            <NavLink
-                                className={({ isActive }) => isActive ?
-                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
-                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
-                                data-tip="Assign Riders"
-                                to="/dashboard/assign-riders">
-                                <RiEBikeFill />
-                                <span className="is-drawer-close:hidden">Assign Riders</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                className={({ isActive }) => isActive ?
-                                    "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
-                                    "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
-                                data-tip="Users Management"
-                                to="/dashboard/users-management">
-                                <FaUsers></FaUsers>
-                                <span className="is-drawer-close:hidden">Users Management</span>
-                            </NavLink>
-                        </li>
+                                <li>
+                                    <NavLink
+                                        className={({ isActive }) => isActive ?
+                                            "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                            "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                        data-tip="Assign Riders"
+                                        to="/dashboard/assign-riders">
+                                        <RiEBikeFill />
+                                        <span className="is-drawer-close:hidden">Assign Riders</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        className={({ isActive }) => isActive ?
+                                            "is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold bg-[#CAEB66] text-[#000000] " :
+                                            "text-sm md:text-lg lg:text-lg hover:bg-[#CAEB6670] font-semibold text-[#000000]"}
+                                        data-tip="Users Management"
+                                        to="/dashboard/users-management">
+                                        <FaUsers></FaUsers>
+                                        <span className="is-drawer-close:hidden">Users Management</span>
+                                    </NavLink>
+                                </li>
+                            </> 
+                        }
 
 
                         {/* List item */}
